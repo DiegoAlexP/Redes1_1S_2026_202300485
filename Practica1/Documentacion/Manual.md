@@ -312,6 +312,6 @@ exit
 
 ## Paquetes de 192.178.85.32 a 192.178.85.39
 
-
+![alt text](image-23.png)
 
 ![alt text](image-18.png)
