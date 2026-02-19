@@ -284,24 +284,34 @@ exit
 
 ![alt text](image-13.png)
 
-### PAQUETES
+### PAQUETES Y TABLA ARP
 
 ## Paquetes de 192.178.85.52 a 192.178.85.60
+
+![alt text](image-19.png)
 
 ![alt text](image-14.png)
 
 ## Paquetes de 192.178.85.33 a 192.178.85.47
 
+![alt text](image-20.png)
+
 ![alt text](image-15.png)
 
 ## Paquetes de 192.178.85.3 a 192.178.85.26
+
+![alt text](image-21.png)
 
 ![alt text](image-16.png)
 
 ## Paquetes de 192.178.85.29 a 192.178.85.54
 
+![alt text](image-22.png)
+
 ![alt text](image-17.png)
 
 ## Paquetes de 192.178.85.32 a 192.178.85.39
+
+
 
 ![alt text](image-18.png)
