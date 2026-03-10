@@ -182,3 +182,23 @@ show vtp status
 ![alt text](image-10.png)
 
 ![alt text](image-11.png)
+
+### CONFIGURACION PC
+
+## PC 1 - VENTAS
+
+![alt text](image-12.png)
+
+![alt text](image-16.png)
+
+## PC 2 - VENTAS
+
+![alt text](image-13.png)
+
+## PC 1 - COMPRAS
+
+![alt text](image-14.png)
+
+## PC 2 - COMPRAS
+
+![alt text](image-15.png)
