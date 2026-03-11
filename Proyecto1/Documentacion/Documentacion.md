@@ -245,3 +245,228 @@ show etherchannel summary
 show spanning-tree
 ```
 
+**Configuración en SW-A1**
+
+Para fibra optica entre edificios
+
+![alt text](image-14.png)
+
+```bash
+enable
+conf t
+
+interface range fa4/1, fa5/1
+channel-protocol pagp
+channel-group 2 mode desirable
+no shutdown
+exit
+
+interface port-channel 2
+switchport mode trunk
+switchport trunk allowed vlan 15,25,35,45,55
+no shutdown
+end
+wr
+```
+
+## Edificio B
+
+### Dispositivos:
+
+
+- 4 computadoras (PC-PT)
+- 2 Switches (2960-24TT)
+- 2 Switch (Switch-PT)
+- Hub (HUB.PT)
+- 3 Laptops (Laptop-PT)
+
+**VLANs para este edificio**
+
+1. Administracion
+2. Biblioteca
+3. Docencia
+
+**Asignacion IP**
+
+* Administracion ```192.168.15.0/24```
+* Biblioteca ```192.168.35.0/24```
+* Docencia ```192.168.25.0/24```
+
+
+**Configuracion switch SW-B1 modo cliente**
+
+![alt text](image-15.png)
+
+```bash
+enable
+conf t
+
+hostname SW-A2 
+
+vtp domain C8_NetCore
+vtp password proyecto12026
+vtp mode client
+vtp version 2
+
+```
+
+
+**Configuración de TRUNK**
+
+*SW-B1 → SW-B3*
+
+![alt text](image-16.png)
+
+
+```bash
+interface g0/1
+switchport mode trunk
+switchport trunk allowed vlan 15,25,35,45,55
+```
+
+
+*SW-B1 → SW-B4*
+
+![alt text](image-17.png)
+
+```bash
+interface g1/1
+switchport mode trunk
+switchport trunk allowed vlan 15,25,35,45,55
+```
+
+*SW-B3 → SW-B4*
+
+![alt text](image-18.png)
+
+```bash
+interface fa0/1
+switchport mode trunk
+switchport trunk allowed vlan 15,25,35,45,55
+```
+
+
+**Configuración de puertos ACCESS**
+
+*SW-B3*
+
+![alt text](image-19.png)
+```bash
+# VLAN 35
+interface fa0/2
+switchport mode access
+switchport access vlan 35
+
+# VLAN 25
+
+interface fa0/3
+switchport mode access
+switchport access vlan 25
+
+
+```
+
+*SW-B4*
+
+![alt text](image-6.png)
+
+```bash
+# VLAN 15
+interface fa0/2
+switchport mode access
+switchport access vlan 15
+
+# VLAN 35
+interface fa0/3
+switchport mode access
+switchport access vlan 35
+
+
+```
+
+
+**Configurar Spanning Tree Rapid-PVST**
+
+**SW-A1 - SW-A2 - SW-A3**
+
+![alt text](image-20.png)
+
+![alt text](image-21.png)
+
+
+```bash
+enable
+conf t
+spanning-tree mode rapid-pvst
+
+```
+
+**Configuracion SW-B2**
+
+![alt text](image-22.png)
+
+```bash
+enable
+conf t
+
+hostname SW-B2 
+
+vtp domain C8_NetCore
+vtp password proyecto12026
+vtp mode client
+vtp version 2
+
+```
+
+**Configuración en SW-B2**
+
+Para fibra optica entre edificios
+
+![alt text](image-23.png)
+
+```bash
+enable
+conf t
+
+interface range fa9/1, fa8/1
+channel-protocol pagp
+channel-group 2 mode desirable
+no shutdown
+exit
+
+interface port-channel 2
+switchport mode trunk
+switchport trunk allowed vlan 15,25,35,45,55
+no shutdown
+end
+wr
+```
+
+
+![alt text](image-24.png)
+
+```bash
+conf t
+interface range fa5/1, fa4/1
+channel-group 2 mode desirable
+exit
+
+interface port-channel 2
+switchport mode trunk
+switchport trunk allowed vlan 15,25,35,45,55
+no shutdown
+end
+wr
+
+```
+
+**Configuración de puertos ACCESS**
+
+**SW-B2**
+
+```bash
+# VLAN 35
+interface fa0/3
+switchport mode access
+switchport access vlan 35
+```
