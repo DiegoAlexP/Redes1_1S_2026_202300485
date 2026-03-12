@@ -470,3 +470,297 @@ interface fa0/3
 switchport mode access
 switchport access vlan 35
 ```
+
+
+
+**Comprobaciones**
+
+**Ver las VLANs configuradas**
+
+![alt text](image-9.png)
+
+```bash
+show vlan brief
+```
+
+**Ver los TRUNKS entre switches**
+
+![alt text](image-25.png)
+
+**SW-B1**
+```bash
+show interfaces trunk
+```
+
+**Ver VTP**
+
+![alt text](image-26.png)
+
+```bash
+show vtp status
+```
+
+**Ver EtherChanne**
+**SW-A2 Y SW-A3**
+
+```bash
+show etherchannel summary
+```
+
+
+![alt text](image-27.png)
+
+**Ver Spanning Tree**
+
+![alt text](image-28.png)
+
+```bash
+show spanning-tree
+```
+
+## Edificio C
+
+### Dispositivos:
+
+- 5 computadoras (PC-PT)
+- 2 Switches (2960-24TT)
+- 2 Switches (Switch-PT)
+- Hub (Hub-PT)
+
+**VLANs para este edificio**
+
+1. Administracion
+2. Biblioteca
+3. Docencia
+
+**Asignacion IP**
+
+* Administracion ```192.168.15.0/24```
+* Biblioteca ```192.168.35.0/24```
+* Docencia ```192.168.25.0/24```
+
+
+**Configuracion switch SW-C1, C2, C3 Y C4 modo cliente**
+
+
+Misma configuracion para los 3 switches
+
+
+![alt text](image-29.png)
+
+```bash
+enable
+conf t
+
+hostname SW-A2 
+
+vtp domain C8_NetCore
+vtp password proyecto12026
+vtp mode client
+vtp version 2
+```
+
+**Configuración de TRUNK**
+
+*SW-C4 → HUB*
+
+![alt text](image-30.png)
+
+```bash
+interface g9/1
+switchport mode trunk
+switchport trunk allowed vlan 15,25,35,45,55
+```
+
+
+*SW-C3 → HUB*
+
+![alt text](image-35.png)
+
+```bash
+interface fa0/1
+switchport mode trunk
+switchport trunk allowed vlan 15,25,35,45,55
+```
+
+*SW-C1 → HUB*
+
+![alt text](image-33.png)
+
+```bash
+interface fa3/1
+switchport mode trunk
+switchport trunk allowed vlan 15,25,35,45,55
+```
+
+
+*SW-C2 → HUB*
+
+![alt text](image-34.png)
+
+```bash
+interface fa0/3
+switchport mode trunk
+switchport trunk allowed vlan 15,25,35,45,55
+```
+
+
+**Configuración de puertos ACCESS**
+
+*SW-C3*
+
+![alt text](image-36.png)
+```bash
+
+# VLAN 35
+interface fa0/2
+switchport mode access
+switchport access vlan 35
+
+# VLAN 15
+
+interface fa0/3
+switchport mode access
+switchport access vlan 15
+
+```
+
+*SW-C1*
+
+![alt text](image-37.png)
+
+```bash
+# VLAN 15
+interface fa1/1
+switchport mode access
+switchport access vlan 15
+
+
+```
+
+*SW-C2*
+
+![alt text](image-38.png)
+
+```bash
+# VLAN 15
+interface fa0/2
+switchport mode access
+switchport access vlan 15
+
+# VLAN 15
+interface fa0/1
+switchport mode access
+switchport access vlan 15
+
+
+```
+
+**Configurar Spanning Tree Rapid-PVST**
+
+**SW-C1 - SW-C2 - SW-C3**
+
+![alt text](image-39.png)
+
+
+```bash
+enable
+conf t
+spanning-tree mode rapid-pvst
+
+```
+
+
+**Configurar PortChannel con PAgP**
+
+**Configuración SW-B4 (PAgP DESIRABLE)**
+![alt text](image-31.png)
+```bash
+enable
+conf t
+
+interface range fa8/1 , fa7/1
+ channel-protocol pagp
+ channel-group 1 mode desirable
+ no shutdown
+exit
+
+interface port-channel 1
+ switchport mode trunk
+ switchport trunk allowed vlan 15,25,35,45,55
+ no shutdown
+exit
+
+wr
+```
+
+**Configuración SW-A3 (PAgP DESIRABLE)**
+
+![alt text](image-32.png)
+
+```bash
+enable
+conf t
+
+interface range fa6/1 , fa3/1
+ channel-protocol pagp
+ channel-group 1 mode desirable
+ no shutdown
+exit
+
+interface port-channel 1
+ switchport mode trunk
+ switchport trunk allowed vlan 15,25,35,45,55
+ no shutdown
+exit
+
+wr
+
+```
+
+
+
+**Comprobaciones**
+
+**Ver las VLANs configuradas**
+
+![alt text](image-40.png)
+
+```bash
+show vlan brief
+```
+
+**Ver los TRUNKS entre switches**
+
+![alt text](image-41.png)
+
+**SW-B1**
+```bash
+show interfaces trunk
+```
+
+**Ver VTP**
+
+![alt text](image-42.png)
+
+```bash
+show vtp status
+```
+
+**Ver EtherChanne**
+**SW-A2 Y SW-A3**
+
+```bash
+show etherchannel summary
+```
+
+
+![alt text](image-43.png)
+
+**Ver Spanning Tree**
+
+![alt text](image-44.png)
+
+```bash
+show spanning-tree
+```
