@@ -87,8 +87,19 @@ Spanning Tree evita bucles de capa 2 al bloquear caminos redundantes cuando es n
 ### EtherChannel
 EtherChannel agrupa varios enlaces fisicos en un unico enlace logico. Sus ventajas principales son mayor ancho de banda agregado y redundancia frente a la falla de un enlace individual.
 
+### VLANS
+
+| No 	| Nombre      	| VLAN 	|
+|:--:	|-------------	|------	|
+| 1  	| ADMIN       	| 15   	|
+| 2  	| DOCENTES    	| 25   	|
+| 3  	| BIBLIOTECA  	| 35   	|
+| 4  	| LABORATORIO 	| 45   	|
+| 5  	| VISITANTES  	| 55   	|
 
 ## Edificio A
+
+![alt text](image-84.png)
 
 ### Dispositivos:
 
@@ -110,6 +121,18 @@ EtherChannel agrupa varios enlaces fisicos en un unico enlace logico. Sus ventaj
 * Administracion ```192.168.15.0/24```
 * Laboratorio ```192.168.45.0/24```
 * Docencia ```192.168.25.0/24```
+
+**IPs ASIGNADAS**
+
+| Área / Dispositivo | Tipo de Equipo | Dirección IP     |
+|--------------------|---------------|------------------|
+| Docencia1          | Celular       | 192.168.25.2     |
+| Docencia2          | Celular       | 192.168.25.3     |
+| Docencia3          | Celular       | 192.168.25.4     |
+| Admin2             | Computadora   | 192.168.15.3     |
+| Laboratorio4       | Computadora   | 192.168.45.5     |
+| Laboratorio2       | Computadora   | 192.168.45.3     |
+
 
 
 **Configuracion switch SW-A1 modo server**
@@ -351,6 +374,9 @@ wr
 
 ## Edificio B
 
+
+![alt text](image-85.png)
+
 ### Dispositivos:
 
 
@@ -371,6 +397,19 @@ wr
 * Administracion ```192.168.15.0/24```
 * Biblioteca ```192.168.35.0/24```
 * Docencia ```192.168.25.0/24```
+
+
+**IPs Asignadas**
+
+| Área / Dispositivo | Tipo de Equipo | Dirección IP     |
+|--------------------|---------------|------------------|
+| Biblioteca1        | Computadora   | 192.168.35.2     |
+| Docencia6          | Laptop        | 192.168.25.7     |
+| Admin1             | Laptop        | 192.168.15.2     |
+| Biblioteca2        | Laptop        | 192.168.35.3     |
+| Biblioteca4        | Computadora   | 192.168.35.5     |
+| Biblioteca3        | Computadora   | 192.168.35.4     |
+| Biblioteca5        | Computadora   | 192.168.35.6     |
 
 
 **Configuracion switch SW-B1 modo cliente**
@@ -600,6 +639,10 @@ show spanning-tree
 
 ## Edificio C
 
+
+![alt text](image-83.png)
+
+
 ### Dispositivos:
 
 - 5 computadoras (PC-PT)
@@ -618,6 +661,18 @@ show spanning-tree
 * Administracion ```192.168.15.0/24```
 * Biblioteca ```192.168.35.0/24```
 * Docencia ```192.168.25.0/24```
+
+**IPs Asignadas**
+
+
+| Área / Dispositivo | Tipo de Equipo | Dirección IP     |
+|--------------------|---------------|------------------|
+| Docencia7          | Computadora   | 192.168.25.8     |
+| Docencia8          | Computadora   | 192.168.25.9     |
+| Docencia9          | Computadora   | 192.168.25.10    |
+| Admin3             | Computadora   | 192.168.15.4     |
+| Biblioteca6        | Computadora   | 192.168.35.7     |
+
 
 
 **Configuracion switch SW-C1, C2, C3 Y C4 modo cliente**
@@ -848,6 +903,8 @@ show spanning-tree
 
 ## Edificio D
 
+![alt text](image-86.png)
+
 ### Dispositivos:
 
 - 7 computadoras (PC-PT)
@@ -871,6 +928,26 @@ show spanning-tree
 * Biblioteca ```192.168.35.0/24```
 * Visitantes ```192.168.55.0/24```
 
+
+
+**IPs Asignadas**
+
+
+| Área / Dispositivo | Tipo de Equipo | Dirección IP     |
+|--------------------|---------------|------------------|
+| Biblioteca7        | Computadora   | 192.168.35.8     |
+| Laboratorio3       | Computadora   | 192.168.45.4     |
+| Admin5             | Computadora   | 192.168.15.6     |
+| Docencia10         | Server        | 192.168.25.11    |
+| Admin4             | Computadora   | 192.168.15.5     |
+
+
+
+| Área / Dispositivo | Tipo de Equipo | Dirección IP   |
+|--------------------|---------------|----------------|
+| Visitantes1        | Computadora   | 192.168.55.2   |
+| Visitantes2        | Computadora   | 192.168.55.3   |
+| Visitantes3        | Computadora   | 192.168.55.4   |
 
 **Configuracion switch SW-D1, D2, D3, D4 Y D5 modo cliente**
 
@@ -1253,3 +1330,143 @@ show spanning-tree
 ## Topologia Completa
 
 ![alt text](image-73.png)
+
+###  Identificación de Equipos (Banner MOTD) 
+
+![alt text](image-74.png)
+
+
+```bash
+enable
+conf t
+banner motd #Bienvenido a Edificio A - NETCORE_202300485#
+exit
+wr
+```
+
+![alt text](image-75.png)
+
+
+
+## IPs Utilizadas 
+
+| Área / Dispositivo | Tipo de Equipo | Dirección IP     |
+|--------------------|---------------|------------------|
+| Admin1             | Laptop        | 192.168.15.2     |
+| Admin2             | Computadora   | 192.168.15.3     |
+| Admin3             | Computadora   | 192.168.15.4     |
+| Admin4             | Computadora   | 192.168.15.5     |
+| Admin5             | Computadora   | 192.168.15.6     |
+| Biblioteca1        | Computadora   | 192.168.35.2     |
+| Biblioteca2        | Laptop        | 192.168.35.3     |
+| Biblioteca3        | Computadora   | 192.168.35.4     |
+| Biblioteca4        | Computadora   | 192.168.35.5     |
+| Biblioteca5        | Computadora   | 192.168.35.6     |
+| Biblioteca6        | Computadora   | 192.168.35.7     |
+| Biblioteca7        | Computadora   | 192.168.35.8     |
+| Docencia1          | Celular       | 192.168.25.2     |
+| Docencia2          | Celular       | 192.168.25.3     |
+| Docencia3          | Celular       | 192.168.25.4     |
+| Docencia6          | Laptop        | 192.168.25.7     |
+| Docencia7          | Computadora   | 192.168.25.8     |
+| Docencia8          | Computadora   | 192.168.25.9     |
+| Docencia9          | Computadora   | 192.168.25.10    |
+| Docencia10         | Server        | 192.168.25.11    |
+| Laboratorio2       | Computadora   | 192.168.45.3     |
+| Laboratorio3       | Computadora   | 192.168.45.4     |
+| Laboratorio4       | Computadora   | 192.168.45.5     |
+| Visitantes1        | Computadora   | 192.168.55.2     |
+| Visitantes2        | Computadora   | 192.168.55.3     |
+| Visitantes3        | Computadora   | 192.168.55.4     |
+
+
+## Dominios de Colision  
+
+| Área           | Dispositivos | Dominios de Colisión |
+|----------------|-------------|----------------------|
+| Administración | 5           | 5                    |
+| Docencia       | 8           | 8                    |
+| Biblioteca     | 7           | 7                    |
+| Laboratorio    | 3           | 3                    |
+| Visitantes     | 3           | 3                    |
+| **Total**      | **26**      | **26**               |
+
+## Dominios de Broadcast por VLAN
+
+| VLAN | Área           | Red              | Dispositivos |
+|-----|---------------|-----------------|--------------|
+| 10  | Administración | 192.168.15.0/24 | Admin1, Admin2, Admin3, Admin4, Admin5 |
+| 20  | Docencia       | 192.168.25.0/24 | Docencia1, Docencia2, Docencia3, Docencia6, Docencia7, Docencia8, Docencia9, Docencia10 |
+| 30  | Biblioteca     | 192.168.35.0/24 | Biblioteca1, Biblioteca2, Biblioteca3, Biblioteca4, Biblioteca5, Biblioteca6, Biblioteca7 |
+| 40  | Laboratorio    | 192.168.45.0/24 | Laboratorio2, Laboratorio3, Laboratorio4 |
+| 50  | Visitantes     | 192.168.55.0/24 | Visitantes1, Visitantes2, Visitantes3 |
+
+## PRESUPUESTO
+
+
+Para la implementación física de la red mostrada en la topología se consideran los equipos principales de interconexión, módulos de expansión, cableado estructurado y conectores necesarios para la comunicación entre los distintos switches y dispositivos finales.
+
+
+### Equipos de Red
+
+
+| Equipo                         | Cantidad | Precio Unitario (USD) | Precio Unitario (GTQ) | Subtotal USD | Subtotal GTQ |
+| ------------------------------ | -------- | --------------------- | --------------------- | ------------ | ------------ |
+| Switch Cisco 2960-24TT         | 12       | $950                  | Q7,410                | $11,400      | Q88,920      |
+| Switch equivalente (Switch-PT) | 3        | $300                  | Q2,340                | $900         | Q7,020       |
+
+![alt text](image-76.png)
+
+
+
+### Módulos de Fibra Óptica
+
+| Equipo            | Cantidad | Precio Unitario (USD) | Precio Unitario (GTQ) | Subtotal USD | Subtotal GTQ |
+| ----------------- | -------- | --------------------- | --------------------- | ------------ | ------------ |
+| PT-SWITCH-NM-1FFE | 8        | $120                  | Q936                  | $960         | Q7,488       |
+
+![alt text](image-77.png)
+
+
+### Cableado de Red
+
+| Material                     | Cantidad | Precio Unitario USD | Precio Unitario GTQ | Subtotal USD | Subtotal GTQ |
+| ---------------------------- | -------- | ------------------- | ------------------- | ------------ | ------------ |
+| Cable UTP Cat6 (rollo 305m)  | 3        | $150                | Q1,170              | $450         | Q3,510       |
+| Cable fibra óptica multimodo | 120 m    | $2.50               | Q19.5               | $300         | Q2,340       |
+
+![alt text](image-78.png)
+
+![alt text](image-79.png)
+
+
+### Conectores y Accesorios
+
+| Material                | Cantidad | Precio Unitario USD | Precio Unitario GTQ | Subtotal USD | Subtotal GTQ |
+| ----------------------- | -------- | ------------------- | ------------------- | ------------ | ------------ |
+| Conectores RJ45         | 100      | $0.50               | Q3.9                | $50          | Q390         |
+| Patch cords Cat6        | 30       | $5                  | Q39                 | $150         | Q1,170       |
+| Conectores fibra óptica | 10       | $6                  | Q46.8               | $60          | Q468         |
+
+![alt text](image-80.png)
+
+![alt text](image-81.png)
+
+![alt text](image-82.png)
+
+
+### RESUMEN
+
+| Concepto                | Total USD | Total GTQ |
+| ----------------------- | --------- | --------- |
+| Equipos de red          | $12,300   | Q95,940   |
+| Módulos de fibra        | $960      | Q7,488    |
+| Cableado                | $750      | Q5,850    |
+| Conectores y accesorios | $260      | Q2,028    |
+
+
+### TOTAL
+
+| Total USD   | Total GTQ    |
+| ----------- | ------------ |
+| **$14,270** | **Q111,306** |
