@@ -764,3 +764,388 @@ show etherchannel summary
 ```bash
 show spanning-tree
 ```
+
+
+## Edificio D
+
+### Dispositivos:
+
+- 7 computadoras (PC-PT)
+- 3 Switches (2960-24TT)
+- 3 Switches (Switch-PT)
+- Acces Point (AC-PT)
+- Repetidor (Repeater-PT)
+- Server (Server-PT)
+
+**VLANs para este edificio**
+
+1. Administracion
+2. Laboratorio
+3. Biblioteca
+4. Visitantes
+
+**Asignacion IP**
+
+* Administracion ```192.168.15.0/24```
+* Laboratorio ```192.168.45.0/24```
+* Biblioteca ```192.168.35.0/24```
+* Visitantes ```192.168.55.0/24```
+
+
+**Configuracion switch SW-D1, D2, D3, D4 Y D5 modo cliente**
+
+
+Misma configuracion para los 5 switches excepto 1.
+
+![alt text](image-45.png)
+
+```bash
+enable
+conf t
+
+hostname SW-A2 
+
+vtp domain C8_NetCore
+vtp password proyecto12026
+vtp mode client
+vtp version 2
+```
+
+**Configuracion switch SW-E1 modo Transparente**
+
+![alt text](image-58.png)
+
+![alt text](image-59.png)
+
+```bash
+enable
+conf t
+
+hostname SW-E1
+vtp domain C8_NetCore
+vtp password proyecto12026
+vtp mode transparent
+vtp version 2
+
+```
+
+**Ethernet Channel**
+**Configuración en SW-D5**
+
+Para fibra optica entre edificios
+
+![alt text](image-46.png)
+
+```bash
+enable
+conf t
+
+interface range fa4/1, fa5/1
+channel-protocol pagp
+channel-group 1 mode desirable
+no shutdown
+exit
+
+interface port-channel 1
+switchport mode trunk
+switchport trunk allowed vlan 15,25,35,45,55
+no shutdown
+end
+wr
+```
+
+SW 2
+
+![alt text](image-47.png)
+
+```bash
+conf t
+interface range fa7/1, fa8/1
+channel-group 1 mode desirable
+exit
+
+interface port-channel 1
+switchport mode trunk
+switchport trunk allowed vlan 15,25,35,45,55
+no shutdown
+end
+wr
+
+```
+
+
+**Configuración en SW-D1**
+
+Para fibra optica entre edificios
+
+![alt text](image-48.png)
+
+```bash
+enable
+conf t
+
+interface range fa5/1, fa6/1
+channel-protocol pagp
+channel-group 2 mode desirable
+no shutdown
+exit
+
+interface port-channel 2
+switchport mode trunk
+switchport trunk allowed vlan 15,25,35,45,55
+no shutdown
+end
+wr
+```
+
+SW 2
+
+![alt text](image-49.png)
+
+```bash
+conf t
+interface range fa4/1, fa5/1
+channel-protocol pagp
+channel-group 2 mode desirable
+no shutdown
+exit
+
+interface port-channel 2
+switchport mode trunk
+switchport trunk allowed vlan 15,25,35,45,55
+no shutdown
+end
+wr
+
+```
+
+
+
+
+**Configuración de TRUNK**
+
+*SW-C4 → HUB*
+
+![alt text](image-50.png)
+
+```bash
+interface g9/1
+switchport mode trunk
+switchport trunk allowed vlan 15,25,35,45,55
+```
+
+
+*SW-D1 → SW-D5*
+
+![alt text](image-51.png)
+
+```bash
+interface fa4/1
+switchport mode trunk
+switchport trunk allowed vlan 15,25,35,45,55
+```
+
+*SW-D5 → SW-D2*
+
+![alt text](image-52.png)
+
+```bash
+interface gig7/1
+switchport mode trunk
+switchport trunk allowed vlan 15,25,35,45,55
+```
+
+
+*SW-D2 → SW-D5*
+
+![alt text](image-53.png)
+
+```bash
+interface gig6/1
+switchport mode trunk
+switchport trunk allowed vlan 15,25,35,45,55
+```
+*SW-D2 → SW-D4*
+![alt text](image-55.png)
+```bash
+interface fa1/1
+switchport mode trunk
+switchport trunk allowed vlan 15,25,35,45,55
+```
+
+*SW-D4 → SW-D2*
+
+![alt text](image-54.png)
+
+```bash
+interface fa0/3
+switchport mode trunk
+switchport trunk allowed vlan 15,25,35,45,55
+```
+
+*SW-D2 → Repeater*
+
+![alt text](image-56.png)
+
+```bash
+interface fa0/1
+switchport mode trunk
+switchport trunk allowed vlan 15,25,35,45,55
+```
+*SW-D3 → Repeater*
+
+![alt text](image-57.png)
+
+```bash
+interface fa0/4
+switchport mode trunk
+switchport trunk allowed vlan 15,25,35,45,55
+```
+
+
+*SW-D2 → SW-E1*
+
+![alt text](image-60.png)
+
+```bash
+interface fa2/1
+switchport mode trunk
+switchport trunk allowed vlan 15,25,35,45,55
+```
+
+*SW-D1 → SW-E1*
+
+![alt text](image-61.png)
+
+```bash
+interface fa0/1
+switchport mode trunk
+switchport trunk allowed vlan 15,25,35,45,55
+```
+
+
+**Configurar Spanning Tree Rapid-PVST**
+
+**SW-D1 - SW-D2 - SW-D3 - SW-D4 - SW-D5**
+
+![alt text](image-62.png)
+
+
+```bash
+enable
+conf t
+spanning-tree mode rapid-pvst
+
+```
+
+
+
+
+**Configuración de puertos ACCESS**
+
+*SW-D4*
+
+![alt text](image-63.png)
+```bash
+
+# VLAN 35
+interface fa0/1
+switchport mode access
+switchport access vlan 35
+
+# VLAN 45
+
+interface fa0/2
+switchport mode access
+switchport access vlan 45
+
+```
+
+*SW-D3*
+
+![alt text](image-64.png)
+
+```bash
+# VLAN 15
+interface range fa0/1, fa0/3
+switchport mode access
+switchport access vlan 15
+
+# VLAN 25
+interface fa0/2
+switchport mode access
+switchport access vlan 25
+
+
+
+```
+
+*SW-C2*
+
+![alt text](image-38.png)
+
+```bash
+# VLAN 15
+interface fa0/2
+switchport mode access
+switchport access vlan 15
+
+# VLAN 15
+interface fa0/1
+switchport mode access
+switchport access vlan 15
+
+
+```
+
+
+
+
+**Comprobaciones**
+
+**Ver las VLANs configuradas**
+
+![alt text](image-65.png)
+
+```bash
+show vlan brief
+```
+
+**Ver los TRUNKS entre switches**
+
+![alt text](image-66.png)
+
+**SW-B1**
+```bash
+show interfaces trunk
+```
+
+**Ver VTP**
+
+![alt text](image-67.png)
+
+```bash
+show vtp status
+```
+
+**Ver EtherChanne**
+**SW-B2 Y SW-D5**
+
+
+![alt text](image-68.png)
+
+
+```bash
+show etherchannel summary
+```
+
+
+
+
+**Ver Spanning Tree**
+
+![alt text](image-69.png)
+
+```bash
+show spanning-tree
+```
