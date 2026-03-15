@@ -1,11 +1,91 @@
 
 
 
+# UNIVERSIDAD DE SAN CARLOS DE GUATEMALA
+## FACULTAD DE INGENIERÍA
+### REDES DE COMPUTADORAS 1
+
+**TUTOR ACADÉMICO:** César Fernando Sazo Quisquinay
+
+---
+
+**Diego Alexander Pablo Subuyuj**  
+**CARNÉ:** 202300485  
+**SECCIÓN:** N
+
+**Guatemala, 19 de enero del 2026**
 
 
+## PROYECTO 1
+### NetCore Academy
 
 
+## OBJETIVOS DEL SISTEMA
 
+### GENERAL
+Disenar, simular y documentar una red VLAN de cuatro edificios por medio de Cisco Packet Tracer, aplicando buenas practicas de segmentacion logica, administracion de switches y validacion de conectividad en un entorno controlado.
+
+### ESPECÍFICOS
+- Modelar una topologia funcional para un edificio de 4 edificios con al menos 50 dispositivos finales.
+- Configurar VLANs para separar trafico por areas o funciones, mejorando orden, seguridad y administracion.
+- Implementar VTP para centralizar la distribucion de informacion de VLAN entre switches del mismo dominio.
+- Establecer enlaces troncales 802.1Q para transportar multiples VLANs entre equipos de conmutacion.
+- Configurar puertos de acceso segun la necesidad de cada dispositivo final y su respectiva VLAN.
+- Aplicar Spanning Tree (Rapid-PVST) para prevenir bucles de capa 2 y acelerar la convergencia.
+- Utilizar EtherChannel para aumentar capacidad y redundancia en enlaces entre switches.
+- Verificar conectividad y consistencia de configuracion mediante pruebas basicas de comunicacion y revision de tablas.
+
+## INTRODUCCIÓN
+
+El presente proyecto integra los fundamentos de conmutacion vistos en el curso de Redes de Computadoras 1, trasladandolos a un escenario practico de simulacion.
+
+Desde una perspectiva tecnica, la propuesta se centra en separar dominios de broadcast por medio de VLANs, estandarizar la propagacion de dichas VLANs con VTP y asegurar una interconexion confiable con enlaces troncales. Adicionalmente, se incorporan mecanismos de resiliencia y eficiencia como Rapid-PVST y EtherChannel, que son esenciales para evitar fallas por bucles y para optimizar el aprovechamiento de los enlaces. La simulacion permite validar decisiones de diseno antes de una implementacion real, reduciendo riesgos y facilitando la comprension del comportamiento de la red. De esta forma, el proyecto no solo evidencia el dominio de comandos de configuracion, sino tambien la capacidad de planificar, justificar y documentar una solucion de red alineada con requerimientos academicos.
+
+## JUSTIFICACION
+
+La realizacion de esta practica fortalece la relacion entre teoria y aplicacion real en el area de redes. Implementar un escenario completo en Packet Tracer permite comprender con mayor claridad como se comportan los dispositivos de capa 2 ante diferentes politicas de segmentacion y transporte de trafico.
+
+Asimismo, el proyecto aporta competencias clave para entornos profesionales: analisis de requerimientos, diseno de topologias, estandarizacion de configuraciones, deteccion temprana de errores y documentacion tecnica reproducible.
+
+## ALCANCE DE LA PRÁCTICA
+
+* Diseno logico y fisico de la topologia LAN para los tres niveles del edificio en Cisco Packet Tracer.
+* Configuracion de switches con funciones de acceso, distribucion de VLANs y enlaces troncales.
+* Aplicacion de practicas de redundancia y control de lazo de capa 2 con Rapid-PVST y EtherChannel.
+* Asignacion de direccionamiento IP estatico sin duplicidad para los hosts definidos.
+* Verificacion funcional de comunicacion entre equipos permitidos por la segmentacion implementada.
+* Elaboracion de evidencia tecnica de configuraciones y resultados de la simulacion.
+
+### LIMITACIONES
+
+* El entorno es de simulacion, por lo que no se contemplan factores fisicos reales como interferencia, fallos electricos o limitaciones de cableado.
+* No se incluye implementacion de servicios avanzados de capa 3 (enrutamiento dinamico, ACLs complejas o alta disponibilidad de gateway).
+* Las pruebas se orientan al cumplimiento de la practica academica y no a una auditoria de seguridad de nivel empresarial.
+
+## RECURSOS Y HERRAMIENTAS UTILIZADAS
+
+* Cisco Packet Tracer
+* Switches Cisco 2960
+* VPCs (para equipos finales)
+* GitHub (repositorio del curso)
+* Editor Markdown
+
+## MARCO TEORICO RESUMIDO
+
+### VLAN
+Una VLAN permite dividir una red fisica en varias redes logicas independientes. Esto reduce dominios de broadcast, mejora el orden del trafico y facilita aplicar politicas administrativas por area funcional.
+
+### VTP
+VTP (VLAN Trunking Protocol) simplifica la administracion de VLANs al propagar cambios dentro de un mismo dominio. En este proyecto se usa un switch en modo servidor y switches en modo cliente para mantener consistencia.
+
+### Trunk
+Un enlace trunk transporta multiples VLANs sobre un mismo enlace fisico entre switches. Esto permite interconectar segmentos de red sin requerir un enlace dedicado por cada VLAN.
+
+### STP / Rapid-PVST
+Spanning Tree evita bucles de capa 2 al bloquear caminos redundantes cuando es necesario. Rapid-PVST mejora los tiempos de convergencia y mantiene estabilidad ante cambios de topologia.
+
+### EtherChannel
+EtherChannel agrupa varios enlaces fisicos en un unico enlace logico. Sus ventajas principales son mayor ancho de banda agregado y redundancia frente a la falla de un enlace individual.
 
 
 ## Edificio A
@@ -164,14 +244,14 @@ enable
 conf t
 
 interface range fa0/1 , fa0/3
- channel-protocol pagp
- channel-group 1 mode desirable
+ channel-protocol LACP
+ channel-group 1 mode activate
  no shutdown
 exit
 
 interface port-channel 1
  switchport mode trunk
- switchport trunk allowed vlan 11,21,31,41,51
+ switchport trunk allowed vlan 15,25,35,45,55
  no shutdown
 exit
 
@@ -185,14 +265,14 @@ enable
 conf t
 
 interface range fa0/1 , fa0/2
- channel-protocol pagp
- channel-group 1 mode auto
+ channel-protocol LACP
+ channel-group 1 mode activate
  no shutdown
 exit
 
 interface port-channel 1
  switchport mode trunk
- switchport trunk allowed vlan 11,21,31,41,51
+ switchport trunk allowed vlan 15,25,35,45,55
  no shutdown
 exit
 
@@ -1149,3 +1229,27 @@ show etherchannel summary
 ```bash
 show spanning-tree
 ```
+
+
+### COMPROBACIONES GENERALES PINGS
+
+
+**Ping Edificio A al B**
+
+
+![alt text](image-70.png)
+
+
+
+**Ping Edificio A al C**
+
+
+![alt text](image-71.png)
+
+**Ping Edificio A al D**
+
+![alt text](image-72.png)
+
+## Topologia Completa
+
+![alt text](image-73.png)
