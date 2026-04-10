@@ -822,3 +822,40 @@ switchport access vlan 999
 **Ethernetchannel**
 
 ![alt text](image-65.png)
+
+## Dominios de Colisión por Área
+
+Un dominio de colisión es un segmento de red donde dos dispositivos pueden transmitir datos simultáneamente, causando potencialmente colisiones. En una red con switches, cada puerto activo del switch representa un dominio de colisión separado. Las VLANs también crean dominios de colisión independientes, aislando tráfico entre áreas.
+
+### Distribución de Dominios de Colisión
+
+| Área   | VLAN | Switch | Dispositivos Activos | Dominios de Colisión | Total |
+| ------ | ---- | ------ | -------------------- | -------------------- | ----- |
+| Área 1 | 15   | SW-A2  | 5 (fa0/2-6)          | 5                    | 6*    |
+| Área 2 | 25   | SW-A3  | 3 (fa0/2-4)          | 3                    | 4*    |
+| Área 3 | 35   | SW-A4  | 4 (fa0/2-5)          | 4                    | 5*    |
+| Área 4 | 45   | SW-B2  | 3 (fa0/2-4)          | 3                    | 4*    |
+| Área 5 | 55   | SW-B3  | 3 (fa0/2-4)          | 3                    | 4*    |
+| Área 6 | 65   | SW-B4  | 1 (fa0/2)            | 1                    | 2*    |
+| Área 7 | 75   | SW-C2  | 2 (fa0/2-3)          | 2                    | 3*    |
+| Área 8 | 85   | SW-C3  | 1 (fa0/2)            | 1                    | 2*    |
+
+*El total incluye 1 dominio adicional por el enlace trunk (fa0/1) que conecta cada switch de área hacia los switches principales.
+
+### Dominios de Colisión en Switches Principales
+
+**SW-A1 (Administración - Modo Servidor)**
+- Port-Channel 1 (Operación ↔ Control): 1 dominio
+- Port-Channel 2 (Administración ↔ Servicios): 1 dominio
+- Total: 2 dominios de colisión
+
+**SW-B1 (Operación - Modo Servidor)**
+- Port-Channel 1 (Operación ↔ Control): 1 dominio
+- Port-Channel 2 (Operación ↔ Servicios): 1 dominio
+- Total: 2 dominios de colisión
+
+**SW-C1 (Servicios - Modo Servidor)**
+- Port-Channel 1 (Control ↔ Servicios): 1 dominio
+- Port-Channel 2 (Operación ↔ Servicios): 1 dominio
+- Total: 2 dominios de colisión
+
