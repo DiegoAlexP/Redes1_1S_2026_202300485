@@ -971,3 +971,112 @@ wr
 *PING*
 
 ![alt text](image-44.png)
+
+## Configuracion OSPF
+
+**Configuracion Router R-Occidente**
+
+```bash
+enable
+conf t
+
+interface s0/0/0
+ ip address 10.85.0.1 255.255.255.252
+ no shutdown
+
+interface s0/0/1
+ ip address 10.85.0.5 255.255.255.252
+ no shutdown
+
+router ospf 1
+ router-id 1.1.1.1
+ network 10.85.0.0 0.0.0.3 area 0
+ network 10.85.0.4 0.0.0.3 area 0
+
+ network 192.168.85.0 0.0.0.63 area 0
+ network 192.168.85.64 0.0.0.63 area 0
+ network 192.168.85.128 0.0.0.31 area 0
+ network 192.168.85.160 0.0.0.15 area 0
+
+end
+wr
+```
+
+
+![alt text](image-50.png)
+
+
+**Configuracion Router R-OSPF-CORE**
+
+```bash
+enable
+conf t
+hostname R-OSPF-CORE
+
+interface s0/0/0
+ ip address 10.85.0.2 255.255.255.252
+ clock rate 64000
+ no shutdown
+
+interface s0/0/1
+ ip address 10.85.0.9 255.255.255.252
+ clock rate 64000
+ no shutdown
+
+router ospf 1
+ router-id 2.2.2.2
+ network 10.85.0.0 0.0.0.3 area 0
+ network 10.85.0.8 0.0.0.3 area 0
+
+end
+wr
+```
+
+![alt text](image-51.png)
+
+**Configuracion Router R-OSPF-BORDER**
+
+```bash
+enable
+conf t
+hostname R-OSPF-BORDER
+
+interface s0/0/1
+ ip address 10.85.0.6 255.255.255.252
+ no shutdown
+
+interface s0/0/0
+ ip address 10.85.0.10 255.255.255.252
+ no shutdown
+
+router ospf 1
+ router-id 3.3.3.3
+ network 10.85.0.4 0.0.0.3 area 0
+ network 10.85.0.8 0.0.0.3 area 0
+
+end
+wr
+
+```
+
+![alt text](image-52.png)
+
+
+**Comprobaciones**
+
+*show ip ospf neighbor*
+
+
+![alt text](image-53.png)
+
+![alt text](image-54.png)
+
+![alt text](image-55.png)
+
+*show ip ospf interface brief*
+
+![alt text](image-56.png)
+
+![alt text](image-57.png)
+
+![alt text](image-58.png)
