@@ -1080,3 +1080,108 @@ wr
 ![alt text](image-57.png)
 
 ![alt text](image-58.png)
+
+
+## RIP
+
+**Configuracion Router R-RIP-CORE**
+
+```bash
+enable
+conf t
+interface s0/0/0
+ ip address 10.90.0.1 255.255.255.252
+ no shutdown
+
+
+router rip
+ version 2
+ no auto-summary
+
+ network 10.0.0.0
+end
+
+wr
+
+```
+![alt text](image-60.png)
+
+**Configuracion Router R-Central**
+
+```bash
+conf t
+interface s0/0/0
+ ip address 10.90.0.2 255.255.255.252
+ no shutdown
+
+router rip
+ version 2
+ no auto-summary
+
+ network 10.0.0.0
+ network 192.168.0.0
+end
+
+```
+![alt text](image-59.png)
+
+**Comprobaciones**
+
+*show ip route rip*
+
+![alt text](image-61.png)
+
+*show ip protocols*
+
+![alt text](image-62.png)
+
+
+
+## STATIC
+
+**Configuracion R-STATIC-CORE**
+
+```bash
+enable
+conf t
+
+
+ip routing
+
+interface g0/1
+ no switchport
+ ip address 10.91.0.1 255.255.255.252
+ no shutdown
+
+ip route 192.168.86.0 255.255.255.224 10.91.0.2
+ip route 192.168.86.32 255.255.255.224 10.91.0.2
+ip route 192.168.86.64 255.255.255.240 10.91.0.2
+ip route 192.168.86.80 255.255.255.240 10.91.0.2
+
+end
+wr
+```
+![alt text](image-63.png)
+
+**Configuracion R-Norte**
+
+```bash
+enable
+conf t
+
+interface g0/1
+ ip address 10.91.0.2 255.255.255.252
+ no shutdown
+
+ip route 0.0.0.0 0.0.0.0 10.91.0.1
+
+end
+wr
+```
+![alt text](image-64.png)
+
+**Comprobaciones**
+
+*show ip route*
+
+![alt text](image-65.png)
