@@ -1,12 +1,146 @@
 
+# UNIVERSIDAD DE SAN CARLOS DE GUATEMALA
+## FACULTAD DE INGENIERÍA
+### REDES DE COMPUTADORAS 1
+
+**TUTOR ACADÉMICO:** César Fernando Sazo Quisquinay
+
+---
+
+**Diego Alexander Pablo Subuyuj**  
+**CARNÉ:** 202300485  
+**SECCIÓN:** N
+
+**Guatemala, 30 de abril del 2026**
 
 
+## PROYECTO 2
+### Red Nacional de Coordinación SE-CONRED 
+
+
+
+## OBJETIVOS DEL SISTEMA
+
+### GENERAL
+Diseñar, simular y documentar una red empresarial distribuida por múltiples sedes utilizando Cisco Packet Tracer, integrando segmentación lógica mediante VLANs, protocolos de enrutamiento dinámico (OSPF, EIGRP, RIP), redundancia de capa 2 y capa 3, y validación de conectividad extremo a extremo en un entorno controlado.
+### ESPECÍFICOS
+- Modelar una topología multi-sede (Occidente, Norte, Oriente y Central) con más de 50 dispositivos finales.
+- Implementar VLANs para segmentación por áreas funcionales en cada sede.
+- Configurar VTP para la administración centralizada de VLANs.
+- Establecer enlaces troncales 802.1Q entre switches.
+- Implementar Inter-VLAN Routing mediante Router-on-a-Stick.
+- Aplicar Rapid-PVST para prevención de bucles.
+- Utilizar EtherChannel para aumentar capacidad y redundancia en enlaces entre switches.
+- Integrar múltiples protocolos de enrutamiento:
+    - OSPF (Occidente)
+    - EIGRP (Core)
+    - RIP (Central)
+    - Rutas estáticas (Norte)
+
+## INTRODUCCIÓN
+
+Este proyecto representa una simulación de red empresarial distribuida, en la cual se integran múltiples tecnologías de capa 2 y capa 3 para garantizar segmentación, escalabilidad, redundancia y conectividad entre sedes.
+
+Se implementan VLANs para dividir dominios de broadcast, junto con VTP para su administración centralizada. A nivel de capa 2, se aplican Rapid-PVST y EtherChannel para evitar bucles y mejorar la disponibilidad.
+
+A nivel de capa 3, la red utiliza un enfoque híbrido de enrutamiento, combinando OSPF, EIGRP, RIP y rutas estáticas, junto con redistribución entre protocolos, permitiendo comunicación entre todas las regiones.
+
+## JUSTIFICACION
+
+La implementación de múltiples protocolos y mecanismos de redundancia permite simular un entorno más cercano a redes reales empresariales, donde coexisten distintas tecnologías y dominios administrativos.
+
+El uso de HSRP, EtherChannel y STP garantiza alta disponibilidad, mientras que la redistribución de rutas demuestra la integración entre diferentes dominios de enrutamiento.
+
+## ALCANCE DE LA PRÁCTICA
+
+* Diseño de red multi-sede.
+* Implementación de VLANs y VTP.
+* Configuración de Inter-VLAN Routing.
+* Uso de EtherChannel capa 2 y capa 3.
+* Implementación de HSRP.
+* Integración de protocolos dinámicos:
+    * OSPF
+    * EIGRP
+    * RIP
+* Redistribución entre protocolos.
+* Implementación de rutas estáticas.
+* Validación completa de conectividad.
+
+### LIMITACIONES
+
+* Simulación sin condiciones físicas reales.
+* No se implementan ACLs avanzadas ni seguridad profunda.
+* No se incluyen protocolos como BGP o MPLS.
+* La alta disponibilidad se limita a HSRP (no VRRP/GLBP).
+
+## RECURSOS Y HERRAMIENTAS UTILIZADAS
+
+* Cisco Packet Tracer
+* Routers Cisco 2911
+* Switches 2960 y 3650
+* PCs virtuales
+* GitHub
+* Markdown
+
+## MARCO TEORICO RESUMIDO
+
+### VLAN
+Una VLAN permite dividir una red fisica en varias redes logicas independientes. Esto reduce dominios de broadcast, mejora el orden del trafico y facilita aplicar politicas administrativas por area funcional.
+
+### VTP
+VTP (VLAN Trunking Protocol) simplifica la administracion de VLANs al propagar cambios dentro de un mismo dominio. En este proyecto se usa un switch en modo servidor y switches en modo cliente para mantener consistencia.
+
+### Trunk
+Un enlace trunk transporta multiples VLANs sobre un mismo enlace fisico entre switches. Esto permite interconectar segmentos de red sin requerir un enlace dedicado por cada VLAN.
+
+### STP / Rapid-PVST
+Spanning Tree evita bucles de capa 2 al bloquear caminos redundantes cuando es necesario. Rapid-PVST mejora los tiempos de convergencia y mantiene estabilidad ante cambios de topologia.
+
+### EtherChannel
+EtherChannel agrupa varios enlaces fisicos en un unico enlace logico. Sus ventajas principales son mayor ancho de banda agregado y redundancia frente a la falla de un enlace individual.
+
+### OSPF
+
+Protocolo de enrutamiento de estado de enlace utilizado en la sede Occidente para rápida convergencia.
+
+### EIGRP
+
+Protocolo híbrido utilizado como core de la red, proporcionando alta eficiencia y convergencia rápida.
+
+### RIP
+
+Protocolo de vector distancia utilizado en la sede Central por simplicidad.
+
+### Redistribución
+
+Permite intercambio de rutas entre OSPF, EIGRP y RIP, garantizando conectividad global.
+
+### HSRP
+
+Proporciona redundancia de gateway en Oriente, evitando puntos únicos de falla.
+
+
+## Topologia
+
+![alt text](image-73.png)
 
 
 
 ## 1. Sede Occidente 
 
 ![alt text](image.png)
+
+### Topologia de Arbol
+
+**Por qué se eligió:**
+
+* Simplicidad administrativa
+* Fácil expansión
+* Bajo costo
+* Ideal para distribución jerárquica básica
+
+*Justificación:*
+Se utilizó una topología en árbol para organizar los dispositivos de forma jerárquica, facilitando la segmentación por VLAN y el control del tráfico.
 
 ### Dispositivos:
 
@@ -247,6 +381,17 @@ wr
 
 ![alt text](image-12.png)
 
+### Topología en Malla Parcial
+
+**Por qué:**
+
+* Alta disponibilidad
+* Redundancia
+* Mejor tolerancia a fallos
+
+*Justificación:*
+Se implementó una malla parcial para garantizar múltiples caminos entre dispositivos, permitiendo continuidad del servicio ante fallas.
+
 ### Dispositivos:
 
 - 8 computadoras (PC-PT)
@@ -469,6 +614,18 @@ wr
 ## 3. Sede Oriente 
 
 ![alt text](image-24.png)
+
+
+### Topología Jerárquica con Redundancia
+
+**Por qué:**
+
+* Balanceo de carga (HSRP)
+* Alta disponibilidad
+* Escalabilidad
+
+*Justificación:*
+Se emplearon dos routers con HSRP para evitar fallos de gateway y distribuir el tráfico entre VLANs.
 
 ### Dispositivos:
 
@@ -728,6 +885,17 @@ wr
 ## 4. Sede Central 
 
 ![alt text](image-36.png)
+
+### Topología Jerárquica Redundante
+
+**Por qué:**
+
+* Diseño empresarial clásico (Core–Distribución–Acceso)
+* Uso de STP y EtherChannel
+* Alta resiliencia
+
+*Justificación:*
+Se implementó redundancia mediante enlaces múltiples y STP para garantizar estabilidad y evitar loops.
 
 ### Dispositivos:
 
@@ -1393,3 +1561,7 @@ wr
 ![alt text](image-72.png)
 
 
+## PING EN VLANs
+
+
+![alt text](image-74.png)
