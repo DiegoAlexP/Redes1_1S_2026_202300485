@@ -167,6 +167,7 @@ Se utilizó una topología en árbol para organizar los dispositivos de forma je
 |   25 | Administración |               18 | 192.168.85.128/27 | 255.255.255.224 | 192.168.85.129 |
 |   35 | Seguridad      |                8 | 192.168.85.160/28 | 255.255.255.240 | 192.168.85.161 |
 
+![alt text](image-75.png)
 
 **IPs de los disposivos**
 
@@ -418,6 +419,8 @@ Se implementó una malla parcial para garantizar múltiples caminos entre dispos
 |   35 | Seguridad      |    10 | 192.168.86.80/28 | 255.255.255.240 | 192.168.86.81 |
 
 
+![alt text](image-78.png)
+
 **IPs de los disposivos**
 
 | PC          | IP            | Máscara         | Gateway       |
@@ -652,6 +655,7 @@ Se emplearon dos routers con HSRP para evitar fallos de gateway y distribuir el 
 |   25 | Administración    | 192.168.87.64/27 | 255.255.255.224 | 192.168.87.65 |
 |   35 | Seguridad         | 192.168.87.96/28 | 255.255.255.240 | 192.168.87.97 |
 
+![alt text](image-77.png)
 
 **IPs de los disposivos**
 
@@ -923,6 +927,8 @@ Se implementó redundancia mediante enlaces múltiples y STP para garantizar est
 |   85 | Servicios Críticos  |    16 | 192.168.88.96/27  | 255.255.255.224 | 192.168.88.97  |
 |   75 | Soporte             |    10 | 192.168.88.128/28 | 255.255.255.240 | 192.168.88.129 |
 |   35 | Seguridad           |     9 | 192.168.88.144/28 | 255.255.255.240 | 192.168.88.145 |
+
+![alt text](image-79.png)
 
 
 **IPs de los disposivos**
@@ -1559,6 +1565,15 @@ wr
 *show ip route eigrp*
 
 ![alt text](image-72.png)
+
+| Segmento      | Subred                                                                      | Máscara         | Uso                                         |
+| ------------- | --------------------------------------------------------------------------- | --------------- | ------------------------------------------- |
+| OSPF          | 10.85.0.0/30, 10.85.0.4/30, 10.85.0.8/30                                    | 255.255.255.252 | Enlaces seriales entre routers OSPF         |
+| RIP           | 10.90.0.0/30                                                                | 255.255.255.252 | R-RIP-CORE ↔ R-Central                      |
+| Estático      | 10.91.0.0/30                                                                | 255.255.255.252 | R-STATIC-CORE ↔ R-Norte                     |
+| EIGRP Core    | 10.100.0.0/30, 10.100.0.4/30, 10.100.0.8/30                                 | 255.255.255.252 | PortChannels capa 3                         |
+| EIGRP enlaces | 10.100.1.0/30, 10.100.1.4/30, 10.100.1.8/30, 10.100.1.12/30, 10.100.1.16/30 | 255.255.255.252 | Enlaces hacia OSPF, RIP, Oriente y Estático |
+
 
 
 ## PING EN VLANs
