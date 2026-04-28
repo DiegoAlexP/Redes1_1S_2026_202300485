@@ -33,6 +33,21 @@
 |   25 | Administración |               18 | 192.168.85.128/27 | 255.255.255.224 | 192.168.85.129 |
 |   35 | Seguridad      |                8 | 192.168.85.160/28 | 255.255.255.240 | 192.168.85.161 |
 
+
+**IPs de los disposivos**
+
+| PC          | IP             | Máscara         | Gateway        |
+| ----------- | -------------- | --------------- | -------------- |
+| PC-OCC-OP1  | 192.168.85.66  | 255.255.255.192 | 192.168.85.65  |
+| PC-OCC-OP2  | 192.168.85.67  | 255.255.255.192 | 192.168.85.65  |
+| PC-OCC-ADM1 | 192.168.85.130 | 255.255.255.224 | 192.168.85.129 |
+| PC-OCC-ADM2 | 192.168.85.131 | 255.255.255.224 | 192.168.85.129 |
+| PC-OCC-SEG1 | 192.168.85.162 | 255.255.255.240 | 192.168.85.161 |
+| PC-OCC-SEG2 | 192.168.85.163 | 255.255.255.240 | 192.168.85.161 |
+| PC-OCC-INV1 | 192.168.85.2   | 255.255.255.192 | 192.168.85.1   |
+| PC-OCC-INV2 | 192.168.85.3   | 255.255.255.192 | 192.168.85.1   |
+
+
 **Configuracion router R-Occidente modo server**
 ```bash
 enable
@@ -258,6 +273,20 @@ wr
 |   35 | Seguridad      |    10 | 192.168.86.80/28 | 255.255.255.240 | 192.168.86.81 |
 
 
+**IPs de los disposivos**
+
+| PC          | IP            | Máscara         | Gateway       |
+| ----------- | ------------- | --------------- | ------------- |
+| PC-NOR-OP1  | 192.168.86.2  | 255.255.255.224 | 192.168.86.1  |
+| PC-NOR-OP2  | 192.168.86.3  | 255.255.255.224 | 192.168.86.1  |
+| PC-NOR-ADM1 | 192.168.86.66 | 255.255.255.240 | 192.168.86.65 |
+| PC-NOR-ADM2 | 192.168.86.67 | 255.255.255.240 | 192.168.86.65 |
+| PC-NOR-SEG1 | 192.168.86.82 | 255.255.255.240 | 192.168.86.81 |
+| PC-NOR-SEG2 | 192.168.86.83 | 255.255.255.240 | 192.168.86.81 |
+| PC-NOR-INV1 | 192.168.86.34 | 255.255.255.224 | 192.168.86.33 |
+| PC-NOR-INV2 | 192.168.86.35 | 255.255.255.224 | 192.168.86.33 |
+
+
 **Configuracion router R-Occidente**
 
 ```bash
@@ -465,6 +494,24 @@ wr
 |   45 | Inventario        | 192.168.87.32/27 | 255.255.255.224 | 192.168.87.33 |
 |   25 | Administración    | 192.168.87.64/27 | 255.255.255.224 | 192.168.87.65 |
 |   35 | Seguridad         | 192.168.87.96/28 | 255.255.255.240 | 192.168.87.97 |
+
+
+**IPs de los disposivos**
+
+
+| PC          | IP             | Máscara         | Gateway       |
+| ----------- | -------------- | --------------- | ------------- |
+| PC-ORI-AT1  | 192.168.87.4   | 255.255.255.224 | 192.168.87.1  |
+| PC-ORI-AT2  | 192.168.87.5   | 255.255.255.224 | 192.168.87.1  |
+| PC-ORI-ADM1 | 192.168.87.68  | 255.255.255.224 | 192.168.87.65 |
+| PC-ORI-ADM2 | 192.168.87.69  | 255.255.255.224 | 192.168.87.65 |
+| PC-ORI-SEG1 | 192.168.87.100 | 255.255.255.240 | 192.168.87.97 |
+| PC-ORI-SEG2 | 192.168.87.101 | 255.255.255.240 | 192.168.87.97 |
+| PC-ORI-INV1 | 192.168.87.36  | 255.255.255.224 | 192.168.87.33 |
+| PC-ORI-INV2 | 192.168.87.37  | 255.255.255.224 | 192.168.87.33 |
+
+
+
 
 **Configuracion router R-Occidente1**
 ```bash
@@ -708,6 +755,24 @@ wr
 |   85 | Servicios Críticos  |    16 | 192.168.88.96/27  | 255.255.255.224 | 192.168.88.97  |
 |   75 | Soporte             |    10 | 192.168.88.128/28 | 255.255.255.240 | 192.168.88.129 |
 |   35 | Seguridad           |     9 | 192.168.88.144/28 | 255.255.255.240 | 192.168.88.145 |
+
+
+**IPs de los disposivos**
+
+| PC            | IP             | Máscara         | Gateway        |
+| ------------- | -------------- | --------------- | -------------- |
+| PC-CEN-MON1   | 192.168.88.2   | 255.255.255.192 | 192.168.88.1   |
+| PC-CEN-MON2   | 192.168.88.3   | 255.255.255.192 | 192.168.88.1   |
+| PC-CEN-ADM1   | 192.168.88.66  | 255.255.255.224 | 192.168.88.65  |
+| PC-CEN-ADM2   | 192.168.88.67  | 255.255.255.224 | 192.168.88.65  |
+| PC-CEN-SEG1   | 192.168.88.146 | 255.255.255.240 | 192.168.88.145 |
+| PC-CEN-SEG2   | 192.168.88.147 | 255.255.255.240 | 192.168.88.145 |
+| PC-CEN-SOP1   | 192.168.88.130 | 255.255.255.240 | 192.168.88.129 |
+| PC-CEN-SOP2   | 192.168.88.131 | 255.255.255.240 | 192.168.88.129 |
+| PC-CEN-SCRIT1 | 192.168.88.98  | 255.255.255.224 | 192.168.88.97  |
+| PC-CEN-SCRIT2 | 192.168.88.99  | 255.255.255.224 | 192.168.88.97  |
+
+
 
 
 **Configuracion router R-Central**
@@ -1185,3 +1250,146 @@ wr
 *show ip route*
 
 ![alt text](image-65.png)
+
+
+## EIGRP
+
+**Configuracion MLS-EIGRP-CORE1**
+
+```bash
+
+enable
+conf t
+hostname MLS-EIGRP-CORE1
+
+ip routing
+
+interface range g1/1/1 - 2
+ no switchport
+ channel-group 12 mode active
+ no shutdown
+
+interface port-channel 12
+ no switchport
+ ip address 10.100.0.1 255.255.255.252
+ no shutdown
+
+interface range g1/0/2 - 3
+ no switchport
+ channel-group 13 mode active
+ no shutdown
+
+interface port-channel 13
+ no switchport
+ ip address 10.100.0.5 255.255.255.252
+ no shutdown
+
+router eigrp 100
+ no auto-summary
+ network 10.100.0.0 0.0.0.15
+
+end
+wr
+```
+
+![alt text](image-66.png)
+
+**Configuracion MLS-EIGRP-CORE2**
+
+```bash
+
+enable
+conf t
+hostname MLS-EIGRP-CORE2
+
+ip routing
+
+interface range g1/1/1 - 2
+ no switchport
+ channel-group 12 mode active
+ no shutdown
+
+interface port-channel 12
+ no switchport
+ ip address 10.100.0.2 255.255.255.252
+ no shutdown
+
+interface range g1/0/1 - 2
+ no switchport
+ channel-group 23 mode active
+ no shutdown
+
+interface port-channel 23
+ no switchport
+ ip address 10.100.0.9 255.255.255.252
+ no shutdown
+
+router eigrp 100
+ no auto-summary
+ network 10.100.0.0 0.0.0.15
+
+end
+wr
+```
+
+![alt text](image-67.png)
+
+
+**Configuracion MLS-EIGRP-DIST**
+
+```bash
+enable
+conf t
+hostname MLS-EIGRP-DIST
+
+ip routing
+
+interface range fa0/1 , fa0/3
+ no switchport
+ channel-group 13 mode active
+ no shutdown
+
+interface port-channel 13
+ no switchport
+ ip address 10.100.0.6 255.255.255.252
+ no shutdown
+
+interface range fa0/2 , fa0/4
+ no switchport
+ channel-group 23 mode active
+ no shutdown
+
+interface port-channel 23
+ no switchport
+ ip address 10.100.0.10 255.255.255.252
+ no shutdown
+
+router eigrp 100
+ no auto-summary
+ network 10.100.0.0 0.0.0.15
+
+end
+wr
+```
+
+![alt text](image-68.png)
+
+**Comprobaciones**
+
+*show etherchannel summary*
+
+![alt text](image-69.png)
+
+*show ip interface brief*
+
+![alt text](image-70.png)
+
+*show ip eigrp neighbors*
+
+![alt text](image-71.png)
+
+*show ip route eigrp*
+
+![alt text](image-72.png)
+
+
